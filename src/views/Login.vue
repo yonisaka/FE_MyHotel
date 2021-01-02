@@ -10,10 +10,10 @@
                                 <p class="text-muted mb-4">Masuk ke akun anda</p>
                                 <form class="mt-2" v-on:submit.prevent>
                                     <div class="form-group mb-3">
-                                        <input type="text" placeholder="Email address" v-model="auth.email" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                        <input type="text" placeholder="Email address" v-model="auth.user_mail" class="form-control rounded-pill border-0 shadow-sm px-4">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="password" placeholder="Password" v-model="auth.password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                        <input type="password" placeholder="Password" v-model="auth.user_password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
                                     </div>
 
                                     <button type="submit" @click="login" class="btn btn-success btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
@@ -52,14 +52,14 @@ export default {
     //   this.user = data;
     // },
     login() {
-      if (this.auth.email && this.auth.password) {
-        console.log(this.auth)
+      if (this.auth.user_mail && this.auth.user_password) {
         axios
-          .get("http://localhost/be_myhotel/api/login", this.auth)
+          .post("http://localhost/be_myhotel/api/login", this.auth)
           .then((response) => {
-            if (response.data.value != null){
-              this.$cookie.set('user_id', response.data.user_id, { expires: '30m' });
-              this.$cookie.set('user_nama', response.data.user_nama, { expires: '30m' });
+            if (response.data != null){
+              console.log(response.data.data);
+              this.$cookie.set('user_id', response.data.data.user_id, { expires: '30m' });
+              this.$cookie.set('user_nama', response.data.data.user_nama, { expires: '30m' });
 
               // this.setUser(response.data)
             this.$toast.success("Berhasil Login", {

@@ -21,7 +21,7 @@
 
       <div class="row mt-3">
         <div class="col-md-6">
-          <img :src=" '../assets/images/' + objek.objek_foto " class="img-fluid shadow" />
+          <img :src="objek.objek_foto" class="img-fluid shadow" />
         </div>
         <div class="col-md-6">
           <h2>
@@ -30,7 +30,7 @@
           <hr />
           <h4>
             Harga :
-            <strong>Rp. {{ objek.harga }}</strong>
+            <strong>Rp. {{ objek.objek_harga }}</strong>
           </h4>
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
@@ -110,8 +110,8 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/objek/" + this.$route.params.id)
-      .then((response) => this.setObjek(response.data))
+      .get("http://localhost/be_myhotel/api/objek?objek_id=" + this.$route.params.id)
+      .then((response) => this.setObjek(response.data.result))
       .catch((error) => console.log(error));
   },
 };

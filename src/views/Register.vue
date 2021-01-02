@@ -57,7 +57,7 @@ export default {
     register() {
       if (this.user.user_nama && this.user.user_mail && this.user.user_password) {
         axios
-          .post("http://localhost:3000/user", this.user)
+          .post("http://localhost/be_myhotel/api/register", this.user)
           .then(() => {
             // this.setUser(response.data)
             this.$toast.success("Berhasil mendaftar", {

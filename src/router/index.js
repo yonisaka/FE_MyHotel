@@ -4,9 +4,11 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Hotels from '../views/Hotels.vue'
+import Auditorium from '../views/Auditorium.vue'
 import Detail from '../views/Detail.vue'
 import Cart from '../views/Cart.vue'
 import PesananSukses from '../views/PesananSukses.vue'
+import Transaksi from '../views/Transaksi.vue'
 
 Vue.use(VueRouter)
 
@@ -32,7 +34,12 @@ Vue.use(VueRouter)
     component: Hotels
   },
   {
-    path: '/hotel/:id',
+    path: '/auditorium',
+    name: 'Auditorium',
+    component: Auditorium
+  },
+  {
+    path: '/detail/:id',
     name: 'Detail',
     component: Detail
   },
@@ -45,6 +52,11 @@ Vue.use(VueRouter)
     path: '/pesanan-sukses',
     name: 'PesananSukses',
     component: PesananSukses
+  },
+  {
+    path: '/transaksi',
+    name: 'Transaksi',
+    component: Transaksi
   }
 ]
 

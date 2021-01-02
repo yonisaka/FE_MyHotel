@@ -54,8 +54,8 @@ export default {
   mounted() {
     // console.log(this.$cookie.get('user'));
     axios
-      .get("http://localhost:3000/best-products")
-      .then((response) => this.setObjeks(response.data))
+      .get("http://localhost/be_myhotel/api/objek")
+      .then((response) => this.setObjeks(response.data.result))
       .catch((error) => console.log(error))
   },
 };

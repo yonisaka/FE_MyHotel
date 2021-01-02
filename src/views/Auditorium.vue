@@ -6,7 +6,7 @@
         <div class="col">
           <h2>
             Daftar
-            <strong>Hotel</strong>
+            <strong>Auditorium</strong>
           </h2>
         </div>
       </div>
@@ -19,7 +19,7 @@
               v-model="search"
               type="text"
               class="form-control"
-              placeholder="Cari Hotel Favorit Anda .."
+              placeholder="Cari Auditorium Favorit Anda .."
               aria-label="Cari"
               aria-describedby="basic-addon1"
               @keyup="searchFood"
@@ -59,7 +59,7 @@ export default {
     return {
       objeks: [],
       search: '',
-      jenis: 'hotel',
+      jenis: 'auditorium',
     };
   },
   methods: {
