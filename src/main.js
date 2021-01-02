@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './assets/css/main.css'
 
+Vue.use(require('vue-cookie'));
 Vue.use(require('vue-moment'));
 Vue.use(VueToast);
 Vue.use(BootstrapVue)

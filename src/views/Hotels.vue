@@ -35,8 +35,8 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-md-4 mt-4" v-for="product in products" :key="product.id">
-          <CardProduct :product="product" />
+        <div class="col-md-4 mt-4" v-for="objek in objeks" :key="objek.objek_id">
+          <CardProduct :objek="objek" />
         </div>
       </div>
     </div>
@@ -57,25 +57,25 @@ export default {
   },
   data() {
     return {
-      products: [],
+      objeks: [],
       search: '',
     };
   },
   methods: {
-    setProducts(data) {
-      this.products = data;
+    setObjeks(data) {
+      this.objeks = data;
     },
     searchFood() {
       axios
-      .get("http://localhost:3000/products?q="+this.search)
-      .then((response) => this.setProducts(response.data))
+      .get("http://localhost:3000/objek?q="+this.search)
+      .then((response) => this.setObjeks(response.data))
       .catch((error) => console.log(error));
     }
   },
   mounted() {
     axios
-      .get("http://localhost:3000/products")
-      .then((response) => this.setProducts(response.data))
+      .get("http://localhost:3000/objek")
+      .then((response) => this.setObjeks(response.data))
       .catch((error) => console.log(error));
   },
 };

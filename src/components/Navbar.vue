@@ -20,19 +20,32 @@
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
+          <b-navbar-nav v-if="!user" class="ml-auto">
             <li class="nav-item">
               <router-link class="nav-link" to="/login">
                 Login
               </router-link>
             </li>
+          </b-navbar-nav>
+          <b-navbar-nav v-else class="ml-auto">
+            <li class="nav-item dropdown">
+              <b-nav-item-dropdown right>
+                <!-- Using 'button-content' slot -->
+                <template #button-content>
+                  {{ user_nama }}
+                </template>
+                <b-dropdown-item href="#">Profile</b-dropdown-item>
+                <b-dropdown-item to="/transaksi">Transaksi</b-dropdown-item>
+                <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+              </b-nav-item-dropdown>
+            </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/keranjang">
-                Booking
+              <router-link class="nav-link" to="/cart">
+                Cart
                 <b-icon-bag></b-icon-bag>
                 <span
                   class="badge badge-success ml-2"
-                >{{ updateKeranjang ? updateKeranjang.length : jumlah_pesanans.length }}</span>
+                >{{ updateCart ? updateCart.length : jumlah_cart.length }}</span>
               </router-link>
             </li>
           </b-navbar-nav>
@@ -49,18 +62,32 @@ export default {
   name: "Navbar",
   data() {
     return {
-      jumlah_pesanans: [],
+      jumlah_cart: [],
+      user: this.$cookie.get('user_id'),
+      user_nama: this.$cookie.get('user_nama')
     };
   },
-  props: ["updateKeranjang"],
+  props: ["updateCart"],
   methods: {
     setJumlah(data) {
-      this.jumlah_pesanans = data;
+      this.jumlah_cart = data;
     },
+    logout() {
+      this.$cookie.delete('user_id');
+      this.$cookie.delete('user_nama');
+      this.$toast.success("Berhasil Logout", {
+        type: "success",
+        position: "top-right",
+        duration: 3000,
+        dismissible: true,
+      });
+      window.location.href = '/';
+      // this.$router.push({ path: "/", redirect: '/'})
+    }
   },
   mounted() {
     axios
-      .get("http://localhost:3000/keranjangs")
+      .get("http://localhost:3000/cart")
       .then((response) => this.setJumlah(response.data))
       .catch((error) => console.log(error));
   },

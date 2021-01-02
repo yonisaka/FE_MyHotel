@@ -21,16 +21,16 @@
 
       <div class="row mt-3">
         <div class="col-md-6">
-          <img :src=" '../assets/images/' + product.gambar " class="img-fluid shadow" />
+          <img :src=" '../assets/images/' + objek.objek_foto " class="img-fluid shadow" />
         </div>
         <div class="col-md-6">
           <h2>
-            <strong>{{ product.nama }}</strong>
+            <strong>{{ objek.objek_nama }}</strong>
           </h2>
           <hr />
           <h4>
             Harga :
-            <strong>Rp. {{ product.harga }}</strong>
+            <strong>Rp. {{ objek.harga }}</strong>
           </h4>
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
@@ -50,7 +50,9 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-success" @click="pemesanan">
+            
+            <p v-if="!user"><i>Anda harus Login terlebih dahulu</i></p>
+            <button v-else type="submit" class="btn btn-success" @click="pemesanan">
               <b-icon-cart></b-icon-cart>Pesan
             </button>
           </form>
@@ -71,21 +73,23 @@ export default {
   },
   data() {
     return {
-      product: {},
+      objek: {},
       pesan: {},
+      user: this.$cookie.get('user_id'),
     };
   },
   methods: {
-    setProduct(data) {
-      this.product = data;
+    setObjek(data) {
+      this.objek = data;
     },
     pemesanan() {
       if (this.pesan.tanggal_mulai && this.pesan.tanggal_selesai) {
-        this.pesan.products = this.product;
+        this.pesan.user_id = this.$cookie.get('user_id');
+        this.pesan.objek = this.objek;
         axios
-          .post("http://localhost:3000/keranjangs", this.pesan)
+          .post("http://localhost:3000/cart", this.pesan)
           .then(() => {
-            this.$router.push({ path: "/keranjang"})
+            this.$router.push({ path: "/cart"})
             this.$toast.success("Sukses Masuk Keranjang", {
               type: "success",
               position: "top-right",
@@ -106,8 +110,8 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/products/" + this.$route.params.id)
-      .then((response) => this.setProduct(response.data))
+      .get("http://localhost:3000/objek/" + this.$route.params.id)
+      .then((response) => this.setObjek(response.data))
       .catch((error) => console.log(error));
   },
 };

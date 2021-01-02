@@ -19,8 +19,8 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-md-4 mt-4" v-for="product in products" :key="product.id">
-          <CardProduct :product="product"/>
+        <div class="col-md-4 mt-4" v-for="objek in objeks" :key="objek.objek_id">
+          <CardProduct :objek="objek"/>
         </div>
       </div>
     </div>
@@ -43,18 +43,19 @@ export default {
   },
   data() {
     return {
-      products: [],
+      objeks: [],
     };
   },
   methods: {
-    setProducts(data) {
-      this.products = data;
+    setObjeks(data) {
+      this.objeks = data;
     },
   },
   mounted() {
+    // console.log(this.$cookie.get('user'));
     axios
       .get("http://localhost:3000/best-products")
-      .then((response) => this.setProducts(response.data))
+      .then((response) => this.setObjeks(response.data))
       .catch((error) => console.log(error))
   },
 };
