@@ -42,16 +42,11 @@
               <input type="date" class="form-control" v-model="pesan.tanggal_selesai" />
             </div>
             <div class="form-group">
-              <input type="hidden" class="form-control" v-model="objek.objek_harga" />
+              <label for="keterangan"><strong>Keterangan</strong></label>
+              <p>
+                {{objek.objek_keterangan}}
+              </p>
             </div>
-            <!-- <div class="form-group">
-              <label for="keterangan">Keterangan</label>
-              <textarea
-                v-model="pesan.keterangan"
-                class="form-control"
-                placeholder="Keterangan .."
-              ></textarea>
-            </div> -->
 
             
             <p v-if="!user"><i>Anda harus Login terlebih dahulu</i></p>
@@ -93,9 +88,10 @@ export default {
       if (this.pesan.tanggal_mulai && this.pesan.tanggal_selesai) {
         this.pesan.objek_id = this.objek.objek_id;
         this.pesan.user_id = this.$cookie.get('user_id');
+        this.pesan.objek = this.objek;
         this.pesan.objek_harga = this.objek.objek_harga;
-        // this.pesan.objek = this.objek;
-        console.log(this.pesan)
+        this.pesan.objek_id = this.objek.objek_id;
+        console.log(this.pesan);
         axios
           .post("http://localhost/be_myhotel/api/cart", this.pesan)
           .then(() => {
