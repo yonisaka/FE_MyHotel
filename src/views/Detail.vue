@@ -42,12 +42,10 @@
               <input type="date" class="form-control" v-model="pesan.tanggal_selesai" />
             </div>
             <div class="form-group">
-              <label for="keterangan">Keterangan</label>
-              <textarea
-                v-model="pesan.keterangan"
-                class="form-control"
-                placeholder="Keterangan .."
-              ></textarea>
+              <label for="keterangan"><strong>Keterangan</strong></label>
+              <p>
+                {{objek.objek_keterangan}}
+              </p>
             </div>
 
             
@@ -86,8 +84,11 @@ export default {
       if (this.pesan.tanggal_mulai && this.pesan.tanggal_selesai) {
         this.pesan.user_id = this.$cookie.get('user_id');
         this.pesan.objek = this.objek;
+        this.pesan.objek_harga = this.objek.objek_harga;
+        this.pesan.objek_id = this.objek.objek_id;
+        console.log(this.pesan);
         axios
-          .post("http://localhost:3000/cart", this.pesan)
+          .post("http://localhost/be_myhotel/api/cart", this.pesan)
           .then(() => {
             this.$router.push({ path: "/cart"})
             this.$toast.success("Sukses Masuk Keranjang", {

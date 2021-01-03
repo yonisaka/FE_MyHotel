@@ -3,6 +3,7 @@
     <img :src="objek.objek_foto" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ objek.objek_nama }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted"> {{objek.hotel_nama}}</h6>
       <p
         class="card-text"
       >Harga : Rp. {{ objek.objek_harga }}</p>
