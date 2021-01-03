@@ -42,12 +42,10 @@
               <input type="date" class="form-control" v-model="pesan.tanggal_selesai" />
             </div>
             <div class="form-group">
-              <label for="keterangan">Keterangan</label>
-              <textarea
-                v-model="pesan.keterangan"
-                class="form-control"
-                placeholder="Keterangan .."
-              ></textarea>
+              <label for="keterangan"><strong>Keterangan</strong></label>
+              <p>
+                {{objek.objek_keterangan}}
+              </p>
             </div>
 
             
