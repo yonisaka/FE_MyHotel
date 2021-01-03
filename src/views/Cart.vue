@@ -120,7 +120,7 @@ export default {
     },
     hapusCart(id) {
       axios
-        .delete("http://localhost:3000/cart/" + id)
+        .delete("http://localhost/be_myhotel/api/cart/" + id)
         .then(() => {
           this.$toast.error("Sukses Hapus Keranjang", {
             type: "error",
