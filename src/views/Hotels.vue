@@ -3,18 +3,14 @@
     <Navbar />
     <div class="container">
       <div class="row mt-4">
-        <div class="col">
+        <div class="col-md-8">
           <h2>
             Daftar
             <strong>Hotel</strong>
           </h2>
         </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col">
+        <div class="col-md-4">
           <div class="input-group mb-3">
-            
             <input
               v-model="search"
               type="text"
@@ -22,7 +18,7 @@
               placeholder="Cari Hotel Favorit Anda .."
               aria-label="Cari"
               aria-describedby="basic-addon1"
-              @keyup="searchFood"
+              @keyup="searchHotel"
             />
 
             <div class="input-group-prepend">
@@ -66,7 +62,7 @@ export default {
     setObjeks(data) {
       this.objeks = data;
     },
-    searchFood() {
+    searchHotel() {
       axios
       .get("http://localhost/be_myhotel/api/objek?objek_jenis="+this.jenis+"&objek_nama="+this.search)
       .then((response) => this.setObjeks(response.data.result))

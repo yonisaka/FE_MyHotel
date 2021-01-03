@@ -3,16 +3,13 @@
     <Navbar />
     <div class="container">
       <div class="row mt-4">
-        <div class="col">
+        <div class="col-md-8">
           <h2>
             Daftar
             <strong>Auditorium</strong>
           </h2>
         </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col">
+        <div class="col-md-4">
           <div class="input-group mb-3">
             
             <input
@@ -33,7 +30,6 @@
           </div>
         </div>
       </div>
-
       <div class="row mb-4">
         <div class="col-md-4 mt-4" v-for="objek in objeks" :key="objek.objek_id">
           <CardProduct :objek="objek" />

@@ -34,8 +34,7 @@
                 <template #button-content>
                   {{ user_nama }}
                 </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item to="/transaksi">Transaksi</b-dropdown-item>
+                <b-dropdown-item to="/akun">Akun</b-dropdown-item>
                 <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
               </b-nav-item-dropdown>
             </li>
@@ -87,8 +86,8 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/cart")
-      .then((response) => this.setJumlah(response.data))
+      .get("http://localhost/be_myhotel/api/cart?user_id="+ this.user)
+      .then((response) => this.setJumlah(response.data.result))
       .catch((error) => console.log(error));
   },
 };

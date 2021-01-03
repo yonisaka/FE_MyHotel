@@ -39,24 +39,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(cart, index) in carts" :key="cart.objek_id">
+                <tr v-for="(cart, index) in carts" :key="cart.cart_id">
                   <th>{{index+1}}</th>
                   <td>
                     <img
-                      :src=" '../assets/images/' + cart.objek.objek_foto "
+                      :src="cart.objek_foto"
                       class="img-fluid shadow mb-2"
                       width="250"
                     /> <br>
-                    <strong>{{ cart.objek.objek_nama }}</strong>
+                    <strong>{{ cart.objek_nama }}</strong>
                   </td>
                   <!-- <td>{{ cart.objek_keterangan ? cart.objek_keterangan : "-" }}</td> -->
                   <td>{{ cart.tanggal_mulai|moment('MMM Do YYYY') }} - {{ cart.tanggal_selesai|moment('MMM Do YYYY') }}</td>
-                  <td align="right">Rp. {{ cart.objek.harga }} / {{ dateDiff[index] }} Malam</td>
+                  <td align="right">Rp. {{ formatPrice(cart.objek_harga) }} / {{ dateDiff[index] }} Malam</td>
                   <td align="right">
-                    <strong>Rp. {{ cart.objek.harga*dateDiff[index] }}</strong>
+                    <strong>Rp. {{ formatPrice(cart.objek_harga*dateDiff[index]) }}</strong>
                   </td>
                   <td align="center" class="text-danger">
-                    <b-icon-trash @click="hapusCart(cart.objek_id)"></b-icon-trash>
+                    <button class="btn btn-sm btn-danger" title="delete">
+                      <b-icon-trash @click="hapusCart(cart.cart_id)"></b-icon-trash>
+                    </button>
                   </td>
                 </tr>
 
@@ -65,7 +67,7 @@
                     <strong>Total Harga :</strong>
                   </td>
                   <td align="right">
-                    <strong>Rp. {{ totalHarga }}</strong>
+                    <strong>Rp. {{ formatPrice(totalHarga) }}</strong>
                   </td>
                   <td></td>
                 </tr>
@@ -112,15 +114,22 @@ export default {
     return {
       carts: [],
       pesan: {},
+      cart: {},
+      user: this.$cookie.get('user_id'),
     };
   },
   methods: { 
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
     setCarts(data) {
       this.carts = data;
     },
     hapusCart(id) {
+      this.cart.cart_id = id;
       axios
-        .delete("http://localhost/be_myhotel/api/cart/" + id)
+        .post("http://localhost/be_myhotel/api/cartDelete", this.cart)
         .then(() => {
           this.$toast.error("Sukses Hapus Keranjang", {
             type: "error",
@@ -131,25 +140,26 @@ export default {
 
           // Update Data keranjang
           axios
-            .get("http://localhost:3000/cart")
-            .then((response) => this.setCarts(response.data))
+            .get("http://localhost/be_myhotel/api/cart?user_id="+ this.user)
+            .then((response) => this.setCarts(response.data.result))
             .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
     },
     checkout() {
       // if (this.pesan.nama && this.pesan.noTelp) {
-        this.pesan.cart = this.carts;
+        this.pesan.user_id = this.user;
+        this.pesan.transaksi_harga = this.totalHarga;
         axios
-          .post("http://localhost:3000/transaksi", this.pesan)
+          .post("http://localhost/be_myhotel/api/transaksi", this.pesan)
           .then(() => {
 
             // Hapus Semua Keranjang 
-            this.carts.map(function (item) {
-              return axios
-                .delete("http://localhost:3000/cart/" + item.id)
-                .catch((error) => console.log(error));
-            });
+            // this.carts.map(function (item) {
+            //   return axios
+            //     .delete("http://localhost:3000/cart/" + item.id)
+            //     .catch((error) => console.log(error));
+            // });
 
             this.$router.push({ path: "/pesanan-sukses" });
             this.$toast.success("Sukses Dipesan", {
@@ -172,8 +182,10 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/be_myhotel/api/cart")
-      .then((response) => this.setCarts(response.data))
+      .get("http://localhost/be_myhotel/api/cart?user_id="+ this.user)
+      .then((response) => {
+        console.log(response.data.result)
+        this.setCarts(response.data.result)})
       .catch((error) => console.log(error));
   },
   computed: {
@@ -192,7 +204,7 @@ export default {
         let end = moment(data.tanggal_selesai);
         let duration = moment.duration(end.diff(start));
         let days = duration.asDays();
-        return items + data.objek.harga * Math.round(days);
+        return items + data.objek_harga * Math.round(days);
       }, 0);
     },
   },

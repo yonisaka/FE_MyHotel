@@ -41,12 +41,12 @@
               <label for="tanggal_selesai">Tanggal Selesai</label>
               <input type="date" class="form-control" v-model="pesan.tanggal_selesai" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="keterangan"><strong>Keterangan</strong></label>
               <p>
                 {{objek.objek_keterangan}}
               </p>
-            </div>
+            </div> -->
 
             
             <p v-if="!user"><i>Anda harus Login terlebih dahulu</i></p>

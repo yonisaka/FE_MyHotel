@@ -8,7 +8,7 @@ import Auditorium from '../views/Auditorium.vue'
 import Detail from '../views/Detail.vue'
 import Cart from '../views/Cart.vue'
 import PesananSukses from '../views/PesananSukses.vue'
-import Transaksi from '../views/Transaksi.vue'
+import Akun from '../views/Akun.vue'
 
 Vue.use(VueRouter)
 
@@ -54,9 +54,9 @@ Vue.use(VueRouter)
     component: PesananSukses
   },
   {
-    path: '/transaksi',
-    name: 'Transaksi',
-    component: Transaksi
+    path: '/akun',
+    name: 'Akun',
+    component: Akun
   }
 ]
 
