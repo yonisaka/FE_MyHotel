@@ -5,7 +5,7 @@
       <h5 class="card-title">{{ objek.objek_nama }}</h5>
       <p
         class="card-text"
-      >Harga : Rp. {{ objek.objek_harga }}</p>
+      >Harga : Rp. {{ formatPrice(objek.objek_harga) }}</p>
       <router-link class="btn btn-success" :to="'/detail/'+objek.objek_id"><b-icon-cart></b-icon-cart> Pesan</router-link>
     </div>
   </div>
@@ -15,6 +15,12 @@
 export default {
   name: "CardProduct",
   props: ["objek"],
+  methods: {
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+  }
 };
 </script>
 
