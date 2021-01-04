@@ -13,7 +13,7 @@
         </div>
         <div class="col">
           <router-link to="/hotel" class="btn btn-success float-right">
-            <b-icon-eye></b-icon-eye>Lihat Semua
+            <b-icon-eye></b-icon-eye> Lihat Semua
           </router-link>
         </div>
       </div>

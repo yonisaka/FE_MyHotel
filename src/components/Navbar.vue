@@ -22,8 +22,13 @@
           <!-- Right aligned nav items -->
           <b-navbar-nav v-if="!user" class="ml-auto">
             <li class="nav-item">
+              <router-link class="btn btn-success rounded-pill shadow-sm px-4 " to="/register">
+              Register
+              </router-link>
+            </li>
+            <li class="nav-item ml-2">
               <router-link class="nav-link" to="/login">
-                Login
+              Login
               </router-link>
             </li>
           </b-navbar-nav>
