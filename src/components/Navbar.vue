@@ -22,8 +22,13 @@
           <!-- Right aligned nav items -->
           <b-navbar-nav v-if="!user" class="ml-auto">
             <li class="nav-item">
+              <router-link class="btn btn-success rounded-pill shadow-sm px-4 " to="/register">
+              Register
+              </router-link>
+            </li>
+            <li class="nav-item ml-2">
               <router-link class="nav-link" to="/login">
-                Login
+              Login
               </router-link>
             </li>
           </b-navbar-nav>
@@ -34,8 +39,7 @@
                 <template #button-content>
                   {{ user_nama }}
                 </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item to="/transaksi">Transaksi</b-dropdown-item>
+                <b-dropdown-item to="/akun">Akun</b-dropdown-item>
                 <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
               </b-nav-item-dropdown>
             </li>
@@ -87,8 +91,8 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/cart")
-      .then((response) => this.setJumlah(response.data))
+      .get("http://localhost/be_myhotel/api/cart?user_id="+ this.user)
+      .then((response) => this.setJumlah(response.data.result))
       .catch((error) => console.log(error));
   },
 };

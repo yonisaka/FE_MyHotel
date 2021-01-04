@@ -30,7 +30,7 @@
           <hr />
           <h4>
             Harga :
-            <strong>Rp. {{ objek.objek_harga }}</strong>
+            <strong>Rp. {{ formatPrice(objek.objek_harga) }}</strong>
           </h4>
           <form class="mt-4" v-on:submit.prevent>
             <div class="form-group">
@@ -41,12 +41,12 @@
               <label for="tanggal_selesai">Tanggal Selesai</label>
               <input type="date" class="form-control" v-model="pesan.tanggal_selesai" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="keterangan"><strong>Keterangan</strong></label>
               <p>
                 {{objek.objek_keterangan}}
               </p>
-            </div>
+            </div> -->
 
             
             <p v-if="!user"><i>Anda harus Login terlebih dahulu</i></p>
@@ -80,8 +80,13 @@ export default {
     setObjek(data) {
       this.objek = data;
     },
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
     pemesanan() {
       if (this.pesan.tanggal_mulai && this.pesan.tanggal_selesai) {
+        this.pesan.objek_id = this.objek.objek_id;
         this.pesan.user_id = this.$cookie.get('user_id');
         this.pesan.objek = this.objek;
         this.pesan.objek_harga = this.objek.objek_harga;

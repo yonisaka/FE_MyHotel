@@ -12,7 +12,7 @@
               </h2>
               <p>Ayo segera pilih dan pesan hotel favorit Anda</p>
               <router-link class="btn btn-lg btn-success" to="/hotel">
-                <b-icon-arrow-right></b-icon-arrow-right>Pesan
+                <b-icon-arrow-right></b-icon-arrow-right> Pesan
               </router-link>
             </div>
           </div>
