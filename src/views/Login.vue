@@ -53,6 +53,7 @@ export default {
     // },
     login() {
       if (this.auth.user_mail && this.auth.user_password) {
+        this.auth.user_role = 2;
         axios
           .post("http://localhost/be_myhotel/api/login", this.auth)
           .then((response) => {
@@ -62,13 +63,13 @@ export default {
               this.$cookie.set('user_nama', response.data.data.user_nama, { expires: '30m' });
 
               // this.setUser(response.data)
-            this.$toast.success("Berhasil Login", {
-              type: "success",
-              position: "top-right",
-              duration: 3000,
-              dismissible: true,
-            });
-            this.$router.push({ path: "/"})
+              this.$toast.success("Berhasil Login", {
+                type: "success",
+                position: "top-right",
+                duration: 3000,
+                dismissible: true,
+              });
+              this.$router.push({ path: "/"})
             } else {
               this.$toast.error("Email dan Password tidak ditemukan", {
                 type: "error",
@@ -79,7 +80,14 @@ export default {
             }
             
           })
-          .catch((err) => console.log(err));
+          .catch(() => {
+            this.$toast.error("Email dan Password tidak ditemukan", {
+                type: "error",
+                position: "top-right",
+                duration: 3000,
+                dismissible: true,
+              });
+          });
       } else {
         this.$toast.error("Email dan Password Harus diisi", {
           type: "error",
