@@ -55,7 +55,7 @@ export default {
       if (this.auth.user_mail && this.auth.user_password) {
         this.auth.user_role = 2;
         axios
-          .post("http://localhost/be_myhotel/api/login", this.auth)
+          .post("http://api.dagdigdug.my.id/api/login", this.auth)
           .then((response) => {
             if (response.data != null){
               console.log(response.data.data);

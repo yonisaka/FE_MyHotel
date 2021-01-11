@@ -64,14 +64,14 @@ export default {
     },
     searchHotel() {
       axios
-      .get("http://localhost/be_myhotel/api/objek?objek_jenis="+this.jenis+"&objek_nama="+this.search)
+      .get("http://api.dagdigdug.my.id/api/objek?objek_jenis="+this.jenis+"&objek_nama="+this.search)
       .then((response) => this.setObjeks(response.data.result))
       .catch((error) => console.log(error));
     }
   },
   mounted() {
     axios
-      .get("http://localhost/be_myhotel/api/objek?objek_jenis="+this.jenis)
+      .get("http://api.dagdigdug.my.id/api/objek?objek_jenis="+this.jenis)
       .then((response) => this.setObjeks(response.data.result))
       .catch((error) => console.log(error));
   },
