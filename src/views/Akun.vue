@@ -122,7 +122,7 @@ export default {
       this.trans.transaksi_id = id;
       this.trans.transaksi_status = 'canceled';
       axios
-        .post("http://localhost/be_myhotel/api/transaksiUpdateSt", this.trans)
+        .post("http://api.dagdigdug.my.id/api/transaksiUpdateSt", this.trans)
         .then(() => {
           this.$toast.error("Sukses Membatalkan Transaksi", {
             type: "error",
@@ -133,7 +133,7 @@ export default {
 
           // Update Data Transaksi
           axios
-            .get("http://localhost/be_myhotel/api/transaksi?user_id="+ this.user)
+            .get("http://api.dagdigdug.my.id/api/transaksi?user_id="+ this.user)
             .then((response) => this.setTransaksi(response.data.result))
             .catch((error) => console.log(error));
         })
@@ -143,14 +143,14 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/be_myhotel/api/transaksi?user_id="+ this.user)
+      .get("http://api.dagdigdug.my.id/api/transaksi?user_id="+ this.user)
       .then((response) => {
         console.log(response.data.result)
         this.setTransaksi(response.data.result)})
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost/be_myhotel/api/user?user_id="+ this.user)
+      .get("http://api.dagdigdug.my.id/api/user?user_id="+ this.user)
       .then((response) => {
         console.log(response.data.result)
         this.setDetailUser(response.data.result)})

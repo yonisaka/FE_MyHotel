@@ -93,7 +93,7 @@ export default {
         this.pesan.objek_id = this.objek.objek_id;
         console.log(this.pesan);
         axios
-          .post("http://localhost/be_myhotel/api/cart", this.pesan)
+          .post("http://api.dagdigdug.my.id/api/cart", this.pesan)
           .then(() => {
             this.$router.push({ path: "/cart"})
             this.$toast.success("Sukses Masuk Keranjang", {
@@ -116,7 +116,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/be_myhotel/api/objek?objek_id=" + this.$route.params.id)
+      .get("http://api.dagdigdug.my.id/api/objek?objek_id=" + this.$route.params.id)
       .then((response) => this.setObjek(response.data.result))
       .catch((error) => console.log(error));
   },
