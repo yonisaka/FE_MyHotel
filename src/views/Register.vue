@@ -57,7 +57,7 @@ export default {
     register() {
       if (this.user.user_nama && this.user.user_mail && this.user.user_password) {
         axios
-          .post("http://api.dagdigdug.my.id/api/register", this.user)
+          .post("https://api.dagdigdug.my.id/api/register", this.user)
           .then(() => {
             // this.setUser(response.data)
             this.$toast.success("Berhasil mendaftar", {
@@ -81,7 +81,7 @@ export default {
   },
   // mounted() {
   //   axios
-  //     .get("http://localhost:8000/movie")
+  //     .get("https://localhost:8000/movie")
   //     .then((response) => this.setUser(response.data))
   //     .catch((error) => console.log(error));
   // }

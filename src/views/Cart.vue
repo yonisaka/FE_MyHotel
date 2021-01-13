@@ -129,7 +129,7 @@ export default {
     hapusCart(id) {
       this.cart.cart_id = id;
       axios
-        .post("http://api.dagdigdug.my.id/api/cartDelete", this.cart)
+        .post("https://api.dagdigdug.my.id/api/cartDelete", this.cart)
         .then(() => {
           this.$toast.error("Sukses Hapus Keranjang", {
             type: "error",
@@ -140,7 +140,7 @@ export default {
 
           // Update Data keranjang
           axios
-            .get("http://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
+            .get("https://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
             .then((response) => this.setCarts(response.data.result))
             .catch((error) => console.log(error));
         })
@@ -151,13 +151,13 @@ export default {
         this.pesan.user_id = this.user;
         this.pesan.transaksi_harga = this.totalHarga;
         axios
-          .post("http://api.dagdigdug.my.id/api/transaksi", this.pesan)
+          .post("https://api.dagdigdug.my.id/api/transaksi", this.pesan)
           .then(() => {
 
             // Hapus Semua Keranjang 
             // this.carts.map(function (item) {
             //   return axios
-            //     .delete("http://localhost:3000/cart/" + item.id)
+            //     .delete("https://localhost:3000/cart/" + item.id)
             //     .catch((error) => console.log(error));
             // });
 
@@ -182,7 +182,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
+      .get("https://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
       .then((response) => {
         console.log(response.data.result)
         this.setCarts(response.data.result)})
