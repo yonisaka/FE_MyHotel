@@ -7,8 +7,8 @@
       <div class="row mt-4">
         <div class="col">
           <h2>
-            Best
-            <strong>Hotels</strong>
+            News
+            <strong>Rooms</strong>
           </h2>
         </div>
         <div class="col">

@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow card-product">
+  <div class="card shadow card-product h-100">
     <img :src="objek.objek_foto" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ objek.objek_nama }}</h5>
