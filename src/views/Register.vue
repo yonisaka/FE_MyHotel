@@ -57,16 +57,27 @@ export default {
     register() {
       if (this.user.user_nama && this.user.user_mail && this.user.user_password) {
         axios
-          .post("https://api.dagdigdug.my.id/api/register", this.user)
-          .then(() => {
-            // this.setUser(response.data)
-            this.$toast.success("Berhasil mendaftar", {
+          .post("http://localhost/BE_Myhotel/index.php/api/register", this.user)
+          .then((response) => {
+            console.log(response)
+            if(response.data.result !="Success"){
+              this.$toast.success("Email sudah terdaftar", {
+              type: "error",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+            }else{
+              this.$toast.success("Berhasil mendaftar", {
               type: "success",
               position: "top-right",
               duration: 3000,
               dismissible: true,
             });
-            this.$router.push({ path: "/"})
+            this.$router.push({ path: "/login"})
+            }
+            // this.setUser(response.data)
+            
           })
           .catch((err) => console.log(err));
       } else {

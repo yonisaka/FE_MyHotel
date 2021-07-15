@@ -4,7 +4,7 @@
       <div class="container">
           <div class="row">
               <div class="col text-center">
-                  2020 Copyright SiHotel
+                  2021 Copyright SiHotel
               </div>
           </div>
       </div>
