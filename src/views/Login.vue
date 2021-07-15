@@ -55,7 +55,7 @@ export default {
       if (this.auth.user_mail && this.auth.user_password) {
         this.auth.user_role = 2;
         axios
-          .post("https://api.dagdigdug.my.id/api/login", this.auth)
+          .post("http://localhost/BE_Myhotel/index.php/api/login", this.auth)
           .then((response) => {
             if (response.data != null){
               console.log(response.data.data);
@@ -100,7 +100,7 @@ export default {
   },
   // mounted() {
   //   axios
-  //     .get("http://localhost:8000/movie")
+  //     .get("http://localhost/BE_Myhotel/index.php:8000/movie")
   //     .then((response) => this.setUser(response.data))
   //     .catch((error) => console.log(error));
   // }

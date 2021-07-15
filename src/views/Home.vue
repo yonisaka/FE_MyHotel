@@ -54,7 +54,7 @@ export default {
   mounted() {
     // console.log(this.$cookie.get('user'));
     axios
-      .get("https://api.dagdigdug.my.id/api/objek")
+      .get("http://localhost/BE_Myhotel/index.php/api/objek")
       .then((response) => this.setObjeks(response.data.result))
       .catch((error) => console.log(error))
   },

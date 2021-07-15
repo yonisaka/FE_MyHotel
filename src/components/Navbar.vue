@@ -40,7 +40,22 @@
                   {{ user_nama }}
                 </template>
                 <b-dropdown-item to="/akun">Akun</b-dropdown-item>
-                <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+                <b-dropdown-item @click="$bvModal.show('bv-modal-example')">Sign Out</b-dropdown-item>
+                <b-modal id="bv-modal-example" hide-footer>
+                  <template #modal-title>
+                    Hehehe
+                  </template>
+                  <div class="d-block text-center">
+                    <h3>Yakin mau keluar?</h3>
+                  </div>
+                  <v-row>
+                    <v-col class="col-6">
+                  <b-button class="mt-1 " block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
+                  <b-button class="mt-1 btn-danger" block @click="logout">Logout</b-button>
+
+                    </v-col>
+                  </v-row>
+                </b-modal>
               </b-nav-item-dropdown>
             </li>
             <li class="nav-item">
@@ -91,7 +106,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/be_myhotel/api/cart?user_id="+ this.user)
+      .get("http://localhost/BE_Myhotel/index.php/be_myhotel/api/cart?user_id="+ this.user)
       .then((response) => this.setJumlah(response.data.result))
       .catch((error) => console.log(error));
   },

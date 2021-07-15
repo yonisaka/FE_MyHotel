@@ -129,7 +129,7 @@ export default {
     hapusCart(id) {
       this.cart.cart_id = id;
       axios
-        .post("https://api.dagdigdug.my.id/api/cartDelete", this.cart)
+        .post("http://localhost/BE_Myhotel/index.php/api/cartDelete", this.cart)
         .then(() => {
           this.$toast.error("Sukses Hapus Keranjang", {
             type: "error",
@@ -140,7 +140,7 @@ export default {
 
           // Update Data keranjang
           axios
-            .get("https://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
+            .get("http://localhost/BE_Myhotel/index.php/api/cart?user_id="+ this.user)
             .then((response) => this.setCarts(response.data.result))
             .catch((error) => console.log(error));
         })
@@ -151,7 +151,7 @@ export default {
         this.pesan.user_id = this.user;
         this.pesan.transaksi_harga = this.totalHarga;
         axios
-          .post("https://api.dagdigdug.my.id/api/transaksi", this.pesan)
+          .post("http://localhost/BE_Myhotel/index.php/api/transaksi", this.pesan)
           .then(() => {
 
             // Hapus Semua Keranjang 
@@ -182,7 +182,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://api.dagdigdug.my.id/api/cart?user_id="+ this.user)
+      .get("http://localhost/BE_Myhotel/index.php/api/cart?user_id="+ this.user)
       .then((response) => {
         console.log(response.data.result)
         this.setCarts(response.data.result)})
